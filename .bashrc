@@ -30,6 +30,6 @@ proot -l -0 -r /data/data/com.termux/files/home/kali-arm64 -b /dev -b /proc -b /
 	sleep 1; startxfce4
 }
 
-cat ~/.board
+echo -e "╔═════╗\n║Todo:╟───────────────\n╚═════╝\n$(cat ~/.termux/todo)\n──────────────────────"
 alias mt='cfm'
 
