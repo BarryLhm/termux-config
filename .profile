@@ -27,3 +27,5 @@ GetHitokoto;
 
 if [ -f "$termuxModeProfile" ]; then LoadTermuxMode $(cat "$termuxModeProfile"); else echo 'Termux 模式未设定, 正常启动'; fi
 
+echo -e "╔═════╗\n║Todo:╟───────────────\n╚═════╝\n$(cat ~/.termux/todo)\n──────────────────────"
+

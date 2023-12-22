@@ -27,9 +27,8 @@ proot -l -0 -r /data/data/com.termux/files/home/kali-arm64 -b /dev -b /proc -b /
 {
 	termux-x11 & export DISPLAY=:0
 	am start com.termux.x11/com.termux.x11.MainActivity
-	sleep 1; startxfce4
+	sleep 1; startxfce4 &
 }
 
-echo -e "╔═════╗\n║Todo:╟───────────────\n╚═════╝\n$(cat ~/.termux/todo)\n──────────────────────"
 alias mt='cfm'
 
