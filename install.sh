@@ -1,8 +1,15 @@
-#!/data/data/com.termux/files/usr/bin/bash
-sourceDir=$(dirname "$0")
-cp "$sourceDir" "~/.termux"
-rm "~/.termux/install.sh"
-rm "~/.termux/backup.sh"
-rn -r "~/.termux/.git"
-ln -s "../../home/.termux/motd" "~/../usr/etc/motd"
+#!/data/data/com.termux/files/usr/bin/bash -n
+rootDir=/data/data/com.termux/files
+sourceDir="$(dirname "$0")"
+
+	LinkFiles()
+{
+	ln -sf .termux/bashrc ~/.bashrc
+	ln -sf .termux/profile ~/.profile
+}
+
+if [ x"$(realpath "$(dirname "$0")")" = x"$rootDir"/home/.termux ] 
+then LinkFiles
+else echo Please move "$sourceDir" to '~'/.termux !
+fi
 
