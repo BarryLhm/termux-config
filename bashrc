@@ -32,6 +32,11 @@ EOF
 	proot -0 -r "$rootfs" -b /dev -b /proc -b /sys -b "$1"/root:/dev/shm -b /sdcard -b /data/data/com.termux/files/home -w /root /usr/bin/env -i HOME=/root TERM="$TERM" LANG=zh_CN.UTF8 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.local/bin:. "$@"
 }
 
+	twl()
+{
+	termux-wake-lock
+}
+
 	nh()
 {
   if [ $# = 0 ]; then StartKali; else StartKali -c "$@"; fi

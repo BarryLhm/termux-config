@@ -1,8 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash -n
 ## home/.profile
 
-termux-wake-lock
-
 	GetHitokoto()
 {
 	if ping -W 1 -c 1 -s 0 v1.hitokoto.cn >/dev/null 2>&1
