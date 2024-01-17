@@ -3,9 +3,7 @@
 
 	GetHitokoto()
 {
-	if ping -W 1 -c 1 -s 0 v1.hitokoto.cn >/dev/null 2>&1
-	then curl https://v1.hitokoto.cn?encode=text 2>/dev/null; echo
-	else echo '无法连接至一言'; fi
+	curl --connect-timeout 0.4 --max-time 0.4 https://v1.hitokoto.cn?encode=text 2>/dev/null && echo || echo '无法连接至一言'
 }
 
 	ShowMotd()
@@ -26,6 +24,7 @@ EOF
 	fi
 }
 
+MountTemp
 ShowMotd
 echo "PID: $$"
 GetHitokoto

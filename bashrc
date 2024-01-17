@@ -8,12 +8,22 @@ DISPLAY=':0'
 
 alias l='ls -lAh'
 
-repeat()
+	MountTemp()
+{
+	local tempDir owner group
+	tempDir='/data/data/com.termux/files/usr/temp'
+	owner="$(id -u)"
+	group="$(id -g)"
+	sudo mountpoint "$tempDir" && return 0
+	sudo mount -t tmpfs -o mode=700,uid="$owner",gid="$group" tmpfs "$tempDir"
+}
+
+	repeat()
 {
 	local v; v="$(printf %-"$1"s)";echo "${v// /"$2"}"
 }
 
-todo()
+	todo()
 {
 	cat << EOF
 ╔═════╗
@@ -39,7 +49,7 @@ EOF
 
 	nh()
 {
-  if [ $# = 0 ]; then StartKali; else StartKali -c "$@"; fi
+	if [ $# = 0 ]; then StartKali; else StartKali -c "$@"; fi
 }
 
 	x11()
