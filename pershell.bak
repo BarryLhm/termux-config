@@ -14,22 +14,21 @@
 	PrintBlue()(echo -ne "${CfBlue}${1}${CsReset}")
 	PrintMagenta()(echo -ne "${CfMagenta}${1}${CsReset}")
 
-#	PrintByReturn()
+	PrintByReturn()
 {
-	if [ "$1" == '0' ]
-	then echo -ne "$CfGreen"
-	else PrintYellow "$1"; echo -ne "$CfRed"
+	if [ "$code" == '0' ]
+	then PrintGreen "$1"
+	else PrintYellow "$code"; PrintRed "$1"
 	fi
 }
-
-#	Prompt()
+	Prompt()
 {
-	retCode="$?"; echo -ne ' '"${CfCyan}"'\w'' '"$(PrintByReturn "$retCode")"'\$'' '"$CsReset"
+	local code="$?"; echo -ne ' '"${CfCyan}"'\w'' '"${CfGreen}"' '"$(PrintByReturn '\$')"' '
 }
 
-PS1=' \e[36m\e[1m\w $(if [ $? == 0 ];then echo -ne \e[32m\e[1m;else echo -ne \e[33m\e[1m"("${?}")"\e[31m\e[1m;fi)\$ \e[0m'
+origPS1=' \[\e[1;36m\]\w $(if [ $? == 0 ];then echo \[\e[1\;32m\];else echo \[\e[1\;31m\]"($?)";fi)\$\[\e[m\] '
 
-#PS1="$(Prompt)"
+PS1="$(Prompt)"
 PS2='> '
 PATH="$PATH"':/data/data/com.termux/files/home/.local/bin'
 DISPLAY=':0'
