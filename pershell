@@ -3,29 +3,29 @@
 
 #### Color Palette Define
 	CsReset='\e[0m' CsHighLight='\e[1m' CsUnderLine='\e[4m' CsBlink='\e[5m' CsInvert='\e[7m' CsInvisible='\e[8m' CsNewLine='\n'
-	CfBlack='\e[30m' CfdRed='\e[31m' CfdGreen='\e[32m' CfdYellow='\e[33m' CfdBlue='\e[34m' CfdMagenta='\e[35m' CfdCyan='\e[36m' CfdWhite='\e[37m'
-	CfGrey='\e[30m\e[1m' CfRed='\e[31m\e[1m' CfGreen='\e[32m\e[1m' CfYellow='\e[33m\e[1m' CfBlue='\e[34m\e[1m' CfMagenta='\e[35m\e[1m' CfCyan='\e[36m\e[1m' CfWhite='\e[37m\e[1m' 
-	CbBlack='\e[40m' CbdRed='\e[41m' CbdGreen='\e[42m' CbdYellow='\e[43m' CbdBlue='\e[44m' CbdMagenta='\e[45m' CbdCyan='\e[46m' CbdWhite='\e[47m'
-	CbGrey='\e[40m\e[1m' CbRed='\e[41m\e[1m' CbGreen='\e[42m\e[1m' CbYellow='\e[43m\e[1m' CbBlue='\e[44m\e[1m' CbMagenta='\e[45m\e[1m' CbCyan='\e[46m\e[1m' CbWhite='\e[47m\e[1m' 
+	cfBlack='\e[30m' cfdRed='\e[31m' cfdGreen='\e[32m' cfdYellow='\e[33m' cfdBlue='\e[34m' cfdMagenta='\e[35m' cfdCyan='\e[36m' cfdWhite='\e[37m'
+	cfGrey='\e[30m\e[1m' cfRed='\e[31m\e[1m' cfGreen='\e[32m\e[1m' cfYellow='\e[33m\e[1m' cfBlue='\e[34m\e[1m' cfMagenta='\e[35m\e[1m' cfCyan='\e[36m\e[1m' cfWhite='\e[37m\e[1m' 
+	cbBlack='\e[40m' cbdRed='\e[41m' cbdGreen='\e[42m' cbdYellow='\e[43m' cbdBlue='\e[44m' cbdMagenta='\e[45m' cbdCyan='\e[46m' cbdWhite='\e[47m'
+	cbGrey='\e[40m\e[1m' cbRed='\e[41m\e[1m' cbGreen='\e[42m\e[1m' cbYellow='\e[43m\e[1m' cbBlue='\e[44m\e[1m' cbMagenta='\e[45m\e[1m' cbCyan='\e[46m\e[1m' cbWhite='\e[47m\e[1m' 
 
-	PrintRed()(echo -ne "${CfRed}${1}${CsReset}")
-	PrintGreen()(echo -ne "${CfGreen}${1}${CsReset}")
-	PrintYellow()(echo -ne "${CfYellow}${1}${CsReset}")
-	PrintBlue()(echo -ne "${CfBlue}${1}${CsReset}")
-	PrintMagenta()(echo -ne "${CfMagenta}${1}${CsReset}")
+	PrintRed()(echo -ne "${cfRed}${1}${CsReset}")
+	PrintGreen()(echo -ne "${cfGreen}${1}${CsReset}")
+	PrintYellow()(echo -ne "${cfYellow}${1}${CsReset}")
+	PrintBlue()(echo -ne "${cfBlue}${1}${CsReset}")
+	PrintMagenta()(echo -ne "${cfMagenta}${1}${CsReset}")
 
 #	PrintByReturn()
-{
-	if [ "$1" == '0' ]
-	then echo -ne "$CfGreen"
-	else PrintYellow "$1"; echo -ne "$CfRed"
-	fi
-}
+#{
+#	if [ "$1" == '0' ]
+#	then echo -ne "$cfGreen"
+#	else PrintYellow "$1"; echo -ne "$cfRed"
+#	fi
+#}
 
 #	Prompt()
-{
-	retCode="$?"; echo -ne ' '"${CfCyan}"'\w'' '"$(PrintByReturn "$retCode")"'\$'' '"$CsReset"
-}
+#{
+#	retCode="$?"; echo -ne ' '"${cfCyan}"'\w'' '"$(PrintByReturn "$retCode")"'\$'' '"$CsReset"
+#}
 
 PS1=' \e[36m\e[1m\w $(if [ $? == 0 ];then echo -ne \e[32m\e[1m;else echo -ne \e[33m\e[1m"("${?}")"\e[31m\e[1m;fi)\$ \e[0m'
 
