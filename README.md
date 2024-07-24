@@ -1,6 +1,9 @@
-Usage:
+Installation:
+
+1. Make a backup of your original .termux directory.
+2. Run the commands below.
 ```
-git clone https://github.com/BarryLhm/termux-config
-termux-config/backup.sh`(not tested)
-termux-config/install.sh`(not tested)
+rm -r ~/.termux 
+git clone https://github.com/BarryLhm/termux-config ~/.termux
+~/.termux/install.sh
 ```

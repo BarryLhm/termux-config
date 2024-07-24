@@ -1,6 +1,30 @@
 #!/data/data/com.termux/files/usr/bin/bash
 ## ~/.bashrc
 
+GetHitokoto()
+{
+	curl --connect-timeout 0.4 --max-time 0.4 https://v1.hitokoto.cn?encode=text 2>/dev/null && echo || echo '无法连接至一言'
+}
+
+ShowBanner()
+{
+	if [ $COLUMNS -ge 65 ]
+	then cat << EOF
+╭────────────────────────────────────────────────────────────────╮
+│ ╭──────────────╮                                               │
+│ │  __          │ ╭───────╮  github.com/BarryLhm/termux-config  │
+│ │  ╲ ╲         │ ╰──╮ ╭──╯                                     │
+│ │   ╲ ╲        │    │ │ ╭────╮ ╭─┬──╮╭─┬─────╮ ╭─╮ ╭─╮ ╭────╮  │
+│ │   ╱ ╱ ____   │    │ │ │ ── │ │ ╭──╯│ ╭╮ ╭╮ │ │ │ │ │ │ ╲╱ │  │
+│ │  ╱_╱ │____│  │    │ │ │ ───┤ │ │   │ ││ ││ │ │ ╰─╯ │ │ ╱╲ │  │
+│ │              │    ╰─╯ ╰────╯ ╰─╯   ╰─╯╰─╯╰─╯ ╰───┴─╯ ╰────╯  │
+│ ╰──────────────╯  Type "xfce" to start xfce desktop.           │
+╰────────────────────────────────────────────────────────────────╯
+EOF
+	else echo 'Welcome to Termux!'; repeat "$COLUMNS" '─'
+	fi
+}
+
 #### Color Palette Define
 	CsReset='\e[0m' CsHighLight='\e[1m' CsUnderLine='\e[4m' CsBlink='\e[5m' CsInvert='\e[7m' CsInvisible='\e[8m' CsNewLine='\n'
 	cfBlack='\e[30m' cfdRed='\e[31m' cfdGreen='\e[32m' cfdYellow='\e[33m' cfdBlue='\e[34m' cfdMagenta='\e[35m' cfdCyan='\e[36m' cfdWhite='\e[37m'
@@ -14,7 +38,7 @@
 	PrintBlue()(echo -ne "${cfBlue}${1}${CsReset}")
 	PrintMagenta()(echo -ne "${cfMagenta}${1}${CsReset}")
 
-#	PrintByReturn()
+#PrintByReturn()
 #{
 #	if [ "$1" == '0' ]
 #	then echo -ne "$cfGreen"
@@ -22,7 +46,7 @@
 #	fi
 #}
 
-#	Prompt()
+#Prompt()
 #{
 #	retCode="$?"; echo -ne ' '"${cfCyan}"'\w'' '"$(PrintByReturn "$retCode")"'\$'' '"$CsReset"
 #}
@@ -36,7 +60,7 @@ DISPLAY=':0'
 
 alias l='ls -lAh'
 
-	MountTemp()
+MountTemp()
 {
 	[ "$(sudo id -u)" != 0 ] && return 0
 	local tempDir uid gid
@@ -48,12 +72,12 @@ alias l='ls -lAh'
 	sudo mount -t tmpfs -o mode=700,uid="$uid",gid="$gid" tmpfs "$tempDir"
 }
 
-	repeat()
+repeat()
 {
 	local v; v="$(printf %-"$1"s)";echo "${v// /"$2"}"
 }
 
-	todo()
+todo()
 {
 	cat << EOF
 ╔═════╗
@@ -65,31 +89,31 @@ EOF
 }
 
 
-	StartProot()
+StartProot()
 {
 	local rootfs="$1"
 	unset LD_PRELOAD
 	proot -0 -r "$rootfs" -b /dev -b /proc -b /sys -b "$1"/root:/dev/shm -b /sdcard -b /data/data/com.termux/files/home -w /root /usr/bin/env -i HOME=/root TERM="$TERM" LANG=zh_CN.UTF8 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.local/bin:. "$@"
 }
 
-	twl()
+twl()
 {
 	termux-wake-lock
 }
 
-	nh()
+nh()
 {
 	if [ $# = 0 ]; then StartKali; else StartKali -c "$@"; fi
 }
 
-	x11()
+x11()
 {
 	export DISPLAY=:0
 	am start com.termux.x11/com.termux.x11.MainActivity
 	termux-x11 &
 }
 
-	xfce()
+xfce()
 {
 	x11 & startxfce4
 }

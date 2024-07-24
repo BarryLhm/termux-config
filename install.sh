@@ -1,15 +1,21 @@
-#!/data/data/com.termux/files/usr/bin/bash -n
-rootDir=/data/data/com.termux/files
-sourceDir="$(dirname "$0")"
+#!/data/data/com.termux/files/usr/bin/bash -eu
 
-	LinkFiles()
+termuxRoot='/data/data/com.termux/files'
+sourceDir="$(realpath "$(dirname "$0")")"
+
+LinkFiles()
 {
-	ln -sf .termux/bashrc ~/.bashrc
-	ln -sf .termux/profile ~/.profile
+	ln -sf '.termux/bashrc' "$HOME"'/.bashrc'
+	ln -sf '.termux/profile' "$HOME"'/.profile'
 }
 
-if [ x"$(realpath "$(dirname "$0")")" = x"$rootDir"/home/.termux ] 
+RemoveMOTD()
+{
+	local motdFile="$termuxRoot"'/usr/etc/motd'
+	mv "$motdFile" "$motdFile"'~'
+}
+if [ "$sourceDir" == "$termuxRoot"'/home/.termux' ] 
 then LinkFiles
-else echo Please move "$sourceDir" to '~'/.termux !
+else echo 'Please move '"$sourceDir"' to ~/.termux !'
 fi
-
+RemoveMOTD
